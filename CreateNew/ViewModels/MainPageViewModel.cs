@@ -1,5 +1,7 @@
 ﻿using System;
+using CreateNew.Models;
 using Prism.Navigation;
+using Reactive.Bindings;
 
 namespace CreateNew.ViewModels
 {
@@ -8,7 +10,7 @@ namespace CreateNew.ViewModels
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Prism.Forms!";
+            Title = "Prism.Forms!";    
         }
     }
 }

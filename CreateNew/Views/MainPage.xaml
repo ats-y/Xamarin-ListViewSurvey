@@ -7,8 +7,39 @@
     mc:Ignorable="d"
     x:Class="CreateNew.Views.MainPage"
     Title="{Binding Title}">
+
     <StackLayout>
         <!-- Place new controls here -->
         <Label Text="{Binding Title}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+
+        <!-- 社員一覧 -->
+        <ListView
+            x:Name="EmployeeListView"
+            HasUnevenRows="True">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout
+                            Padding="10"
+                            BackgroundColor="{Binding BackColor}"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal">
+
+                            <StackLayout
+                                Orientation="Vertical">
+                                <Label Text="名前："/>
+                                <Label Text="{Binding DispName}"/>
+
+                                <!--行き先-->
+                                <Label Text="{Binding DispDestination}" />
+                            </StackLayout>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </StackLayout>
 </ContentPage>
