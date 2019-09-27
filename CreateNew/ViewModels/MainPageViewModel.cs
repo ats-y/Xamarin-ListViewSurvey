@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using CreateNew.Models;
 using Prism.Navigation;
 using Reactive.Bindings;
+using Xamarin.Forms;
 
 namespace CreateNew.ViewModels
 {
@@ -39,5 +41,12 @@ namespace CreateNew.ViewModels
                     name: "B",
                     dest: Employee.EDestination.Unknown));
         }
+
+        public Command<Employee> ItemTappedCommand =>
+            new Command<Employee>(emp =>
+           {
+               Debug.WriteLine("ItemTappedCommand");
+               emp.ChangeDestination();
+           });
     }
 }

@@ -22,19 +22,18 @@ namespace CreateNew.Views
 
             InitializeComponent();
 
-            
             // 社員リストのタップイベント
-            EmployeeListView.ItemTapped += (sender, e) =>
-            {
-                Debug.WriteLine("tap");
+            //EmployeeListView.ItemTapped += (sender, e) =>
+            //{
+            //    Debug.WriteLine("tap");
 
-                // タップされた行のアイテムの選択状態を切り替える。
-                Employee emp = e.Item as Employee;
-                if( emp != null)
-                {
-                    emp.ChangeDestination();
-                }
-            };
+            //    // タップされた行のアイテムの選択状態を切り替える。
+            //    Employee emp = e.Item as Employee;
+            //    if( emp != null)
+            //    {
+            //        emp.ChangeDestination();
+            //    }
+            //};
         }
     }
 }

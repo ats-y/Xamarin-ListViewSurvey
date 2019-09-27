@@ -4,19 +4,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:behaviors="http://prismlibrary.com"
+    xmlns:c="clr-namespace:CreateNew.Converters;assembly=CreateNew"
     mc:Ignorable="d"
     x:Class="CreateNew.Views.MainPage"
     Title="{Binding Title}">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="{Binding Title}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+        <Label Text="{Binding Title}"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
 
         <!-- 社員一覧 -->
         <ListView
             x:Name="EmployeeListView"
             ItemsSource="{Binding EmployeeList}"
             HasUnevenRows="True">
+
+            <!--
+            ListViewのItemTappedイベントを引数とともに
+            ViewModelsのItemTappedCommandにバインディング。
+            EventArgsConverter属性で指定したコンバータークラスで
+            ListViewのItemTappedイベントの引数ItemTappedEventArgsをItemTappedEventArgs.Itemに変換し
+            ItemTappedCommandの引数とする。
+            -->
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="ItemTapped"
+                    Command="{Binding ItemTappedCommand}"
+                    EventArgsConverter="{StaticResource itemTappedEventArgsConverter}" />
+            </ListView.Behaviors>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -27,10 +51,9 @@
                             HorizontalOptions="FillAndExpand"
                             Orientation="Horizontal">
 
-                            <StackLayout
-                                Orientation="Vertical">
-                                <Label Text="名前："/>
-                                <Label Text="{Binding DispName}"/>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="名前：" />
+                                <Label Text="{Binding DispName}" />
 
                                 <!--行き先-->
                                 <Label Text="{Binding DispDestination}" />
