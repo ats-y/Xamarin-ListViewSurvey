@@ -15,6 +15,7 @@
         <!-- 社員一覧 -->
         <ListView
             x:Name="EmployeeListView"
+            ItemsSource="{Binding EmployeeList}"
             HasUnevenRows="True">
 
             <ListView.ItemTemplate>

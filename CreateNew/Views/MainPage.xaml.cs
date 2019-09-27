@@ -16,29 +16,13 @@ namespace CreateNew.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private List<Employee> _employees = new List<Employee>();
-
         public MainPage()
         {
             Debug.WriteLine("コンストラクタ");
 
             InitializeComponent();
 
-            // 社員リストにデータを設定する。
-            _employees.Add(
-                new Employee(
-                    name: "a",
-                    dest: Employee.EDestination.GoOut));
-            _employees.Add(
-                new Employee(
-                    name: "B",
-                    dest: Employee.EDestination.Unknown));
-
-            EmployeeListView.ItemsSource = _employees;
-
+            
             // 社員リストのタップイベント
             EmployeeListView.ItemTapped += (sender, e) =>
             {

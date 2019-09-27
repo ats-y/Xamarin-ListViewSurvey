@@ -9,7 +9,7 @@ namespace CreateNew.Models
     /// 社員クラス
     /// </summary>
     /// <remarks>
-    /// ListViewなどにプロパティ変更を伝えるためINotifyPropertyChangedを実装。
+    /// ListViewなどに本クラスのプロパティ変更を伝えるためINotifyPropertyChangedを実装。
     /// </remarks>
     public class Employee : INotifyPropertyChanged
     {
@@ -81,7 +81,7 @@ namespace CreateNew.Models
         }
 
         /// <summary>
-        /// 背景色
+        /// 背景色プロパティ
         /// </summary>
         public Color BackColor {
             get {
