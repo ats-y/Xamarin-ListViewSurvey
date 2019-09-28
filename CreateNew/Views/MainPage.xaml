@@ -30,7 +30,9 @@
 
             <!--
             ListViewのItemTappedイベントを引数とともに
-            ViewModelsのItemTappedCommandにバインディング。
+            ViewModelsのItemTappedCommandにバインディングさせる定義。
+            EventNameで指定しているのが、バインディングさせたいイベントのイベント名。
+            Commandで指定しているのが、バインド名。
             EventArgsConverter属性で指定したコンバータークラスで
             ListViewのItemTappedイベントの引数ItemTappedEventArgsをItemTappedEventArgs.Itemに変換し
             ItemTappedCommandの引数とする。
@@ -42,6 +44,7 @@
                     EventArgsConverter="{StaticResource itemTappedEventArgsConverter}" />
             </ListView.Behaviors>
 
+            <!-- 社員行 -->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -57,6 +60,43 @@
 
                                 <!--行き先-->
                                 <Label Text="{Binding DispDestination}" />
+
+                                    <!--履歴リスト-->
+                                    <ListView
+                                        x:Name="HistoryListView"
+                                        RowHeight="40"
+                                        ItemsSource="{Binding Histories}"
+                                        IsVisible="{Binding IsVisibleHistoryList}"
+                                        HasUnevenRows="False">
+
+                                        <!--
+                                        履歴ListViewのItemTappedイベントを
+                                        ChildItemTappedCommandにバインディング。
+                                        -->
+                                        <ListView.Behaviors>
+                                            <behaviors:EventToCommandBehavior
+                                                EventName="ItemTapped"
+                                                Command="{Binding ChildItemTappedCommand}"
+                                                EventArgsConverter="{StaticResource itemTappedEventArgsConverter}" />
+                                        </ListView.Behaviors>
+
+                                        <!--履歴行定義-->
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                            
+                                                <ViewCell>
+                                                    <StackLayout
+                                                        BackgroundColor="{Binding CBColor}">
+                                                        <Label
+                                                            Text="{Binding Title}"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </DataTemplate>
+
+                                        </ListView.ItemTemplate>
+
+                                    </ListView>
+
                             </StackLayout>
 
                         </StackLayout>

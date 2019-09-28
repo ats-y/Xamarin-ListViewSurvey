@@ -23,7 +23,7 @@ namespace CreateNew
         protected override void OnInitialized()
         {
             InitializeComponent();
-            NavigationService.NavigateAsync("MainPage");
+            NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

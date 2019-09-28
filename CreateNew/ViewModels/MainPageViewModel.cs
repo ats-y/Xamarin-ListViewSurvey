@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CreateNew.Models;
 using Prism.Navigation;
@@ -34,19 +35,58 @@ namespace CreateNew.ViewModels
             EmployeeList = new List<Employee>();
             EmployeeList.Add(
                 new Employee(
-                    name: "a",
-                    dest: Employee.EDestination.GoOut));
+                    name: "社員 太郎",
+                    dest: Employee.EDestination.GoOut,
+                    histories:new ObservableCollection<DestinationHistory>
+                    {
+                        new DestinationHistory
+                        {
+                            Title = "2019/9/25 10:00 出社",
+                        },
+                        new DestinationHistory
+                        {
+                            Title = "2019/9/25 13:00 外出",
+                        },
+                    }
+                    ));
             EmployeeList.Add(
                 new Employee(
-                    name: "B",
-                    dest: Employee.EDestination.Unknown));
+                    name: "社員 二郎",
+                    dest: Employee.EDestination.Unknown,
+                    histories: new ObservableCollection<DestinationHistory>
+                    {
+                        new DestinationHistory
+                        {
+                            Title = "2019/9/25 9:00 出社",
+                        },
+                        new DestinationHistory
+                        {
+                            Title = "2019/9/25 10:00 外出",
+                        },
+                        new DestinationHistory
+                        {
+                            Title = "2019/9/25 17:30 帰宅",
+                        },
+
+                    }));
+
+            EmployeeList.Add(
+                new Employee(
+                    name: "社員 三郎",
+                    dest: Employee.EDestination.Unknown,
+                    histories: new ObservableCollection<DestinationHistory>()
+                    ));
+
         }
 
+        /// <summary>
+        /// 社員行タップコマンド
+        /// </summary>
         public Command<Employee> ItemTappedCommand =>
             new Command<Employee>(emp =>
-           {
+            {
                Debug.WriteLine("ItemTappedCommand");
                emp.ChangeDestination();
-           });
+            });
     }
 }

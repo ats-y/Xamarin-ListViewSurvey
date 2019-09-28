@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using Xamarin.Forms;
@@ -98,14 +100,18 @@ namespace CreateNew.Models
             }
         }
 
+        public ObservableCollection<DestinationHistory> Histories { get; set; }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Employee(string name, EDestination dest)
+        public Employee(string name, EDestination dest,
+            ObservableCollection<DestinationHistory> histories)
         {
             DispName = name;
             Destination = dest;
             OrgDestination = dest;
+            Histories = histories;
         }
 
         /// <summary>
@@ -131,6 +137,16 @@ namespace CreateNew.Models
             // 行き先と背景色が変わることを通知する。
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DispDestination)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BackColor)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Histories)));
+
         }
+
+        public Command<DestinationHistory> ChildItemTappedCommand =>
+            new Command<DestinationHistory>(his =>
+            {
+                Debug.WriteLine("ChildItemTappedCommand");
+                his.ChangeBackColor();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CBColor"));
+            });
     }
 }
